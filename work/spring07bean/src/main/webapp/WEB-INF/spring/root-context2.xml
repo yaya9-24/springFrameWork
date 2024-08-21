@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	
+
+	<!-- p01,p02,p03 -->
+	<bean id="p01" class="test.com.bean.Person"></bean>
+
+	<bean id="p02" class="test.com.bean.Person">
+		<constructor-arg>
+			<value>서울시</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>02</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="p03" class="test.com.bean.Person">
+		<property name="address" value="경기도"></property>
+		<property name="tel" value="031"></property>
+	</bean>
+
+	<bean id="tb04" class="test.com.bean.TestBean2"></bean>
+
+	<bean id="tb05" class="test.com.bean.TestBean2">
+		<!-- <constructor-arg ref="p02"></constructor-arg> -->
+		<constructor-arg>
+			<ref bean="p02" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="tb06" class="test.com.bean.TestBean2">
+		<!-- <property name="person" ref="p03"></property> -->
+		<property name="person">
+			<ref bean="p03"/>
+		</property>
+	</bean>
+</beans>

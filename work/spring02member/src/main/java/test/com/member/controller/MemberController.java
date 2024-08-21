@@ -36,7 +36,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/m_update.do", method = RequestMethod.GET)
-	public String m_update(MemberVO vo) {
+	public String m_update(MemberVO vo, Model model) {
 		logger.info("Welcome update!");
 		logger.info("{}",vo);
 //		MemberVO vo = new MemberVO();
@@ -45,6 +45,8 @@ public class MemberController {
 		MemberVO vo2 = service.selectOne(vo);
 		logger.info("vo2:{}", vo2);
 
+		model.addAttribute("vo2",vo2);
+		
 		return "member/update";
 	}
 
@@ -56,35 +58,43 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/m_selectAll.do", method = RequestMethod.GET)
-	public String m_selectAll() {
+	public String m_selectAll(Model model) {
 		logger.info("Welcome selectAll!");
 
 		List<MemberVO> list = service.selectAll();
 		logger.info("{}", list);
+		
+		model.addAttribute("list",list);
+		
 		return "member/selectAll";
 	}
 
 	@RequestMapping(value = "/m_searchList.do", method = RequestMethod.GET)
-	public String m_searchList(String searchKey,String searchWord) {
+	public String m_searchList(String searchKey,String searchWord,Model model) {
 		logger.info("Welcome searchList!");
 
 		List<MemberVO> list = service.searchList(searchKey, searchWord);
 		logger.info("{}", list);
+		
+		model.addAttribute("list",list);
+		
 		return "member/selectAll";
 	}
 
 	@RequestMapping(value = "/m_selectOne.do", method = RequestMethod.GET)
-	public String m_selectOne(MemberVO vo) {
+	public String m_selectOne(MemberVO vo, Model model) {
 		logger.info("Welcome selectOne!");
 		logger.info("{}",vo);
 		
 		MemberVO vo2 = service.selectOne(vo);
 		logger.info("vo2:{}", vo2);
+		
+		model.addAttribute("vo2",vo2);
 
 		return "member/selectOne";
 	}
 
-	@RequestMapping(value = "/m_insertOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/m_insertOK.do", method = RequestMethod.POST)
 	public String m_insertOK(MemberVO vo) {
 		logger.info("Welcome insertOK!");
 		logger.info("{}",vo);
@@ -95,7 +105,7 @@ public class MemberController {
 		return "redirect:m_selectAll.do";
 	}
 
-	@RequestMapping(value = "/m_updateOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/m_updateOK.do", method = RequestMethod.POST)
 	public String m_updateOK(MemberVO vo) {
 		logger.info("Welcome updateOK!");
 		logger.info("{}",vo);
@@ -106,7 +116,7 @@ public class MemberController {
 		return "redirect:m_selectAll.do";
 	}
 
-	@RequestMapping(value = "/m_deleteOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/m_deleteOK.do", method = RequestMethod.POST)
 	public String m_deleteOK(MemberVO vo) {
 		logger.info("Welcome deleteOK!");
 		logger.info("{}",vo);
