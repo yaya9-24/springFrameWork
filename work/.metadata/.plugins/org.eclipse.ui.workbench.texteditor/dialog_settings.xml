@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="log."/>
+		<item key="selection" value=".product"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value=".board"/>
+			<item value="B_"/>
+			<item value="System.out.println"/>
 			<item value="logger."/>
 			<item value="test.com.member"/>
 			<item value="oracle"/>
@@ -20,11 +23,11 @@
 			<item value="test.com.member.MemberVO"/>
 			<item value="id=&quot;"/>
 			<item value="log.info(vo);"/>
-			<item value="System.out.println"/>
-			<item value="member"/>
-			<item value="MemberVO"/>
 		</list>
 		<list key="replacehistory">
+			<item value=".product"/>
+			<item value="P_"/>
+			<item value="log.info"/>
 			<item value="log."/>
 			<item value="test.com.mysqlmember"/>
 			<item value="mysql"/>
@@ -37,9 +40,6 @@
 			<item value="test.com.multi.member.MemberVO"/>
 			<item value="id=&quot;B_"/>
 			<item value="test.com.board.comments.CommentsVO"/>
-			<item value="log.info(vo.toString());"/>
-			<item value="log.info"/>
-			<item value="board"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
