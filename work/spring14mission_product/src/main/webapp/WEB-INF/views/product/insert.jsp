@@ -82,7 +82,7 @@
             </tr>
             <tr>
                 <td><label for="count">개수</label></td>
-                <td><input type="text" id="count" name="count" value="2"></td>
+                <td><input type="number" id="count" name="count" value="2"></td>
             </tr>
             <tr>
                 <td><label for="user_id">구매자</label></td>
