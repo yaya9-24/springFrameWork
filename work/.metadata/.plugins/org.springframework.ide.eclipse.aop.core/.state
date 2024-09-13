@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
-<aop-project name="spring24total"/>
-<aop-project name="spring13mybatis_board"/>
-<aop-project name="spring23login_member"/>
+<aop-project name="spring25mongo"/>
+<aop-project name="spring26mongodb_member"/>
 </aop-reference-model>
