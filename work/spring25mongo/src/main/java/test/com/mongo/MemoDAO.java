@@ -24,4 +24,6 @@ public interface MemoDAO {
 	
 	public MemoVO findOne(MemoVO vo);
 	public Document findOneDoc(MemoVO vo);
+	public List<MemoVO> searchList3(int age1, int age2);
+	public List<MemoVO> searchList4(int age1, int age2);
 }

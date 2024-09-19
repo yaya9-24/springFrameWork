@@ -24,5 +24,7 @@ public interface MemberDAO {
 	
 	public MemberVO findOne(MemberVO vo);
 	public Document findOneDoc(MemberVO vo);
+	public List<MemberVO> searchList3(int num1, int num2);
+	public List<MemberVO> searchList4(int num1, int num2);
 	
 }

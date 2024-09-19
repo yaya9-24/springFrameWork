@@ -77,4 +77,14 @@ public class MemoService  {
 		return dao.findOneDoc(vo);
 	}
 
+
+	public List<MemoVO> searchList3(int age1, int age2) {
+		return dao.searchList3(age1,age2);
+	}
+
+
+	public List<MemoVO> searchList4(int age1, int age2) {
+		return dao.searchList4(age1,age2);
+	}
+
 }

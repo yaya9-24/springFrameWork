@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
 <aop-project name="spring25mongo"/>
+<aop-project name="spring27mongodb_employees"/>
 <aop-project name="spring26mongodb_member"/>
 </aop-reference-model>

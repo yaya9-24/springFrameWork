@@ -46,8 +46,28 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Override
 	public long insertMany() {
-		// TODO Auto-generated method stub
-		return 0;
+		log.info("insertMany()....");
+		long flag = 0;
+		
+		try {
+			List<Document> docs = new ArrayList<Document>();
+			for (int i = 0; i < 5; i++) {
+				Document doc = new Document();
+				doc.put("num", 5+(i+1));
+				doc.put("id", "tkwkdlq"+(i+1));
+				doc.put("pw", "abcd"+(i+1));
+				doc.put("name", "yang"+(i+1));
+				doc.put("tel", "010"+(i+1));
+				docs.add(doc);
+			}
+						
+			member.insertMany(docs);
+			flag = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
 	}
 
 	@Override
@@ -75,8 +95,25 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Override
 	public long updateMany(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		log.info("updateMany()....");
+		log.info("vo:{}", vo);
+		long flag = 0;
+		
+		try {
+			Document doc = new Document();
+			doc.put("id", vo.getId());
+			doc.put("pw", vo.getPw());
+			doc.put("name", vo.getName());
+			doc.put("tel", vo.getTel());
+			
+			Bson set = new Document("$set",doc);
+			
+			flag = member.updateMany(Filters.gte("num", vo.getNum()),set).getModifiedCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
 	}
 
 	@Override
@@ -97,8 +134,18 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Override
 	public long deleteMany(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		log.info("deleteMany()....");
+		log.info("vo:{}", vo);
+		long flag = 0;
+		
+		try {
+			
+			flag = member.deleteMany(Filters.gte("num", vo.getNum())).getDeletedCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
 	}
 
 	@Override
@@ -124,14 +171,36 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Override
 	public List<Document> findAllDoc() {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("findAllDoc()....");
+		
+		FindIterable<Document> docs = member.find().sort(new Document("num",-1));
+		List<Document> list = new ArrayList<Document>();
+		for(Document doc : docs) {
+			list.add(doc);
+		}
+
+		return list;
 	}
 
 	@Override
 	public List<MemberVO> findAll2(int page, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("findAll2()....");
+		
+		FindIterable<Document> docs = member.find().sort(new Document("num",-1)).skip((page-1)*limit).limit(limit);
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		for(Document doc : docs) {
+			MemberVO vo = new MemberVO();
+			vo.setMid(doc.get("_id").toString());
+			vo.set_id(doc.get("_id").toString());
+			vo.setNum(doc.getInteger("num", 0));
+			vo.setId(doc.getString("id"));
+			vo.setPw(doc.getString("pw"));
+			vo.setName(doc.getString("name"));
+			vo.setTel(doc.getString("tel"));
+			list.add(vo);
+		}
+
+		return list;
 	}
 
 	@Override
@@ -162,8 +231,28 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Override
 	public List<MemberVO> searchList2(String searchKey, String searchWord, int page, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("searchList()....");
+		log.info("searchKey:{}",searchKey);
+		log.info("searchWord:{}",searchWord);
+		
+		Bson filter = Filters.regex(searchKey, searchWord);
+		
+		FindIterable<Document> docs = member.find(filter).sort(new Document("num",-1)).skip((page-1)*limit).limit(limit);
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		
+		for(Document doc : docs) {
+			MemberVO vo = new MemberVO();
+			vo.setMid(doc.get("_id").toString());
+			vo.set_id(doc.get("_id").toString());
+			vo.setNum(doc.getInteger("num", 0));
+			vo.setId(doc.getString("id"));
+			vo.setPw(doc.getString("pw"));
+			vo.setName(doc.getString("name"));
+			vo.setTel(doc.getString("tel"));
+			list.add(vo);
+		}
+
+		return list;
 	}
 
 	@Override
@@ -188,6 +277,59 @@ public class MemberDAOimpl implements MemberDAO {
 	public Document findOneDoc(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<MemberVO> searchList3(int num1, int num2) {
+		log.info("searchList3()....");
+		log.info("num1:{}",num1);
+		log.info("num2:{}",num2);
+		
+		Bson filter = Filters.and(Filters.gte("num", num1),Filters.lte("num", num2));
+		
+		FindIterable<Document> docs = member.find(filter).sort(new Document("num",-1));
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		
+		for(Document doc : docs) {
+			MemberVO vo = new MemberVO();
+			vo.setMid(doc.get("_id").toString());
+			vo.set_id(doc.get("_id").toString());
+			vo.setNum(doc.getInteger("num", 0));
+			vo.setId(doc.getString("id"));
+			vo.setPw(doc.getString("pw"));
+			vo.setName(doc.getString("name"));
+			vo.setTel(doc.getString("tel"));
+			list.add(vo);
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<MemberVO> searchList4(int num1,int num2) {
+		log.info("searchList4()....");
+		log.info("num1:{}",num1);
+		log.info("num2:{}",num2);
+		
+		Bson filter = Filters.in("num",num1,num2);
+
+		
+		FindIterable<Document> docs = member.find(filter).sort(new Document("num",-1));
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		
+		for(Document doc : docs) {
+			MemberVO vo = new MemberVO();
+			vo.setMid(doc.get("_id").toString());
+			vo.set_id(doc.get("_id").toString());
+			vo.setNum(doc.getInteger("num", 0));
+			vo.setId(doc.getString("id"));
+			vo.setPw(doc.getString("pw"));
+			vo.setName(doc.getString("name"));
+			vo.setTel(doc.getString("tel"));
+			list.add(vo);
+		}
+
+		return list;
 	}
 
 }

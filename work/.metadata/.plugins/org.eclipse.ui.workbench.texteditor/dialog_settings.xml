@@ -8,8 +8,8 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="@Override"/>
 			<item value="// TODO Auto-generated method stub"/>
+			<item value="@Override"/>
 			<item value="logger"/>
 			<item value="product"/>
 			<item value="P_"/>

@@ -83,4 +83,14 @@ public class MemberService {
 		return dao.findOneDoc(vo);
 	}
 
+
+	public List<MemberVO> searchList3(int num1, int num2) {
+		return dao.searchList3(num1,num2);
+	}
+
+
+	public List<MemberVO> searchList4(int num1, int num2) {
+		return dao.searchList4(num1,num2);
+	}
+
 }

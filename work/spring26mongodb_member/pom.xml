@@ -132,7 +132,7 @@
 			<scope>provided</scope>
 		</dependency>   
 		
-		<!-- 아래는 mongodb v7.x 이상일때 필요한 드라이버 -->
+		<!-- 아래는 mongodb v7.x 이상일때 필요한 드라이버 3개-->
 		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
 		
 		<dependency>
